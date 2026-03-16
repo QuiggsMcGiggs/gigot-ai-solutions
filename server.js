@@ -117,6 +117,16 @@ app.get("/leads", requireLogin, (req, res) => {
         <td>${lead.email}</td>
         <td>${lead.message}</td>
         <td>${lead.date}</td>
+
+        <td>
+        <form method="POST" action="/delete/${lead.id}" 
+        onsubmit="return confirm('Delete this lead?')">
+
+        <button type="submit">Delete</button>
+
+        </form>
+        </td>
+
         </tr>
         `).join("");
 
@@ -185,6 +195,7 @@ app.get("/leads", requireLogin, (req, res) => {
         <th>Email</th>
         <th>Message</th>
         <th>Date</th>
+        <th>Delete</th>
         </tr>
 
         ${tableRows}
@@ -199,6 +210,25 @@ app.get("/leads", requireLogin, (req, res) => {
     } catch (err) {
         console.log(err);
         res.send("Database error");
+    }
+
+});
+
+app.post("/delete/:id", requireLogin, (req, res) => {
+
+    try {
+
+        db.prepare(
+            "DELETE FROM leads WHERE id=?"
+        ).run(req.params.id);
+
+        res.redirect("/leads");
+
+    } catch (err) {
+
+        console.log(err);
+        res.send("Error deleting lead");
+
     }
 
 });
