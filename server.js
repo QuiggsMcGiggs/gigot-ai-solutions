@@ -63,10 +63,82 @@ app.post("/contact", contactLimiter, (req, res) => {
         ).run(name, email, message);
 
         res.send(`
-            <h2>Thank you ${name}!</h2>
-            <p>Your message has been saved.</p>
-            <a href="/">Return Home</a>
-        `);
+<html>
+
+<head>
+<title>Message Received</title>
+
+<style>
+
+body{
+font-family:Segoe UI,Arial;
+background:radial-gradient(circle at top,#020617,#000);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.card{
+text-align:center;
+background:rgba(255,255,255,.05);
+padding:40px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.1);
+box-shadow:0 0 40px rgba(56,189,248,.25);
+max-width:400px;
+}
+
+h2{
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+p{
+opacity:.9;
+margin-bottom:25px;
+}
+
+a{
+display:inline-block;
+padding:12px 25px;
+border-radius:10px;
+background:linear-gradient(90deg,#38bdf8,#6366f1);
+color:white;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 0 20px rgba(56,189,248,.6);
+transition:.3s;
+}
+
+a:hover{
+transform:scale(1.05);
+box-shadow:0 0 35px rgba(99,102,241,.9);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>🚀 Thank You ${name}!</h2>
+
+<p>Your message has been received.<br>
+We'll be in touch soon.</p>
+
+<a href="/">Return Home</a>
+
+</div>
+
+</body>
+
+</html>
+`);
 
     } catch (err) {
         console.log(err);
