@@ -213,7 +213,7 @@ app.get("/leads", requireLogin, (req, res) => {
 
         <td>
         <form method="POST" action="/delete/${lead.id}" 
-        onsubmit="return confirm('Delete this lead???')">
+        onsubmit="return confirm('Delete this lead????')">
 
         <button type="submit">Delete</button>
 
